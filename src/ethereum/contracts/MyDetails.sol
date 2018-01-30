@@ -8,8 +8,8 @@ contract MyDetails {
        ipfsHashes[msg.sender] = ipfsHash;
     }
 
-    function getHash(address) public view returns(string) {
-      return ipfsHashes[msg.sender];
+    function getHash(address account) public view returns(string, uint) {
+      return (ipfsHashes[account], block.timestamp);
     }
 
 }

@@ -20,7 +20,7 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <h1 className="App-title">Welcome to IPFS</h1>
+          <h1 className="App-title">Full Stack Ethereum DApp using uPort and IPFS</h1>
           {this.state.avatar &&
             <img className="avatar" src={this.state.avatar} />
           }

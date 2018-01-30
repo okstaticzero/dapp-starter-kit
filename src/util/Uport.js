@@ -1,9 +1,9 @@
 import { Connect, SimpleSigner, MNID } from 'uport-connect'
 
-const uport = new Connect('Todo DApp', {
-    clientId: '2oxQ33MUXYP6w3uYAzPyGWpRnZjhTfwUFEy',
+const uport = new Connect('React uPort IPFS DApp', {
+    clientId: '2omYPjiPUiR6jyNdSZRHgbpn9PxiVqbtVsR',
     network: 'rinkeby',
-    signer: SimpleSigner('676b366dd903fe7d09ed6f30771515035ccb2c280abd52b63f43aed308d5c23c')
+    signer: SimpleSigner('ab1d56711bcf6f7ded8a8b7f768d59e8f3d3a168b75b037848aa142b93e4998f')
 })
 
 const initAccount = async () => {
