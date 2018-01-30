@@ -15,6 +15,7 @@ export class MyForm extends Component {
             website: "",
             account: "",
             json: "",
+            timestamp: "",
             loading: false
         }
     }
@@ -23,15 +24,18 @@ export class MyForm extends Component {
         this.setState({ account });
         console.log('account: ', account);
 
-        const IPFShash = await getContractHash(account);
-        console.log('hash: ', IPFShash);
-        this.retrieveIPFS(IPFShash)
+        const contractDetails = await getContractHash(account);
+        console.log('hash: ', contractDetails[0]);
+        this.retrieveIPFS(contractDetails)
     }
-    retrieveIPFS = async (ipfsHash) => {
+    retrieveIPFS = async (contractDetails) => {
+        const ipfsHash = contractDetails[0];
         if (!ipfsHash) { return }
+        const timestamp = contractDetails[1].c[0];
+        console.log('time: ', timestamp);
         const details = await getJSON(ipfsHash);
         console.log('d: ', details);
-        this.setState({ json: JSON.stringify(details), loading: false })
+        this.setState({ json: details, loading: false, timestamp })
     }
     handleAbout = (e) => {
         this.setState({ about: e.target.value });
@@ -49,16 +53,16 @@ export class MyForm extends Component {
         const { about, github, website } = this.state;
         const hash = await setJSON({ about, github, website });
         console.log('IPFS Hash: ', hash);
+        let contractDetails;
         try {
-            const contractDetails = await setContractHash(this.state.account, hash);
+            contractDetails = await setContractHash(this.state.account, hash);
             console.log('contractDetails: ', contractDetails);
         } catch (error) {
             this.setState({ loading: false });
             alert("There was an error with the transaction, please check your gas settings.");
             return;
         }
-
-        this.retrieveIPFS(hash);
+        this.retrieveIPFS(contractDetails);
     }
     render() {
         const { about, github, website } = this.state;
@@ -74,9 +78,22 @@ export class MyForm extends Component {
                         handleWebsite={this.handleWebsite}
                         handleSubmit={this.handleSubmit} />
                 </Col>
-                <Col sm={6}>
-                    <h4>Details for: {this.state.account}</h4>
-                    {this.state.json}
+                <Col sm={5}>
+                    {this.state.timestamp ?
+                        <div>
+                            <p>Data loaded from Blockchain / IPFS:</p>
+                            <div className="b-chain-data">
+                                <h3>About me: </h3>{this.state.json.about}
+                                <h3>Github URL: </h3>{this.state.json.github}
+                                <h3>Website: </h3>{this.state.json.website}
+                            </div>
+                            <br /><br />
+                            <p>Transaction details: {this.state.account}</p>
+                            <p>Block saved at: {this.state.timestamp}</p>
+                        </div>
+                        :
+                        <h4>No record found. Please enter and submit data on the left</h4>
+                    }
                 </Col>
                 {this.state.loading &&
                     <Loader />

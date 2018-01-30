@@ -58,8 +58,16 @@ span, h1{
   color:#999;
 }
 
-
-
+.b-chain-data{
+  border:1px solid #CCC;
+  background-color: rgb(240, 240, 240);
+  padding: 0px 20px 10px 20px;
+  border-radius:4px;
+}
+h3{
+  color:#888;
+  margin-bottom: 4px;
+}
 .outerLoader{
   display: flex;
   top:0;
