@@ -1,8 +1,14 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+.text-large{
+  font-size: 16px;
+}
 .App {
   text-align: left;
 }
-
-
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
@@ -10,8 +16,8 @@
 }
 
 .App-header {
-  background-color: #222;
-  height: 100px;
+  background-color: #333;
+  height: 120px;
   padding: 20px;
   color: white;
   text-align: center;
@@ -27,14 +33,23 @@
 }
 
 .App-title {
-  font-size: 1.5em;
+  font-size: 1.9em;
 }
 
 .avatar{
   position: absolute;
   right:10px;
-  top:10px;
-  width:100px;
+  top:20px;
+  width:180px;
+}
+.avatar img{
+  width:45%;
+}
+.avatar p{
+  margin-top: 6px;
+  color:#CCC;
+  text-transform: capitalize;
+
 }
 
 .App-intro {

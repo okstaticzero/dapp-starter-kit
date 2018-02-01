@@ -11,21 +11,20 @@ export class Login extends Component {
         console.log('Identity: ', identity);
         //identity passed back from uPort
         this.props.setIdentity(identity.userAccount, identity.user.name, identity.user.avatar.uri)
-
     }
     render() {
         return (
 
             <Col smOffset={3} sm={6} className="login">
-                <p>This App uses uPort for identity verification and authentication on the Blockchain.
+                <p className="text-large">This App uses uPort for identity verification and authentication on the Blockchain.
                     Download the uPort app on your mobile phone to create your identity.
-                     <a href="https://www.uport.me/" rel="noopener noreferrer" target="_blank">https://www.uport.me/</a>
+                <a href="https://www.uport.me/" rel="noopener noreferrer" target="_blank"> https://www.uport.me/</a>
                 </p>
                 <br />
 
                 <Button onClick={this.handleLogin}>Login with uPort</Button>
 
-            </Col>
+            </Col >
 
         )
     }

@@ -1,5 +1,5 @@
-var MyDetails = artifacts.require("./MyDetails.sol");
+var Mydetails = artifacts.require("./Mydetails.sol");
 
 module.exports = function (deployer) {
-  deployer.deploy(MyDetails);
+  deployer.deploy(Mydetails);
 };

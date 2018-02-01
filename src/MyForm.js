@@ -13,29 +13,42 @@ export class MyForm extends Component {
             about: "",
             github: "",
             website: "",
-            account: "",
-            json: "",
+            ipfsData: "",
             timestamp: "",
             loading: false
         }
     }
     componentDidMount = async () => {
-        const account = this.props.match.params.id;
-        this.setState({ account });
-        console.log('account: ', account);
-
-        const contractDetails = await getContractHash(account);
-        console.log('hash: ', contractDetails[0]);
-        this.retrieveIPFS(contractDetails)
+        this.fetchData()
     }
-    retrieveIPFS = async (contractDetails) => {
+    handleSubmit = async (e) => {
+        e.preventDefault();
+        this.setState({ loading: true });
+        const { about, github, website } = this.state;
+        const hash = await setJSON({ about, github, website });
+        try {
+            await setContractHash(this.props.match.params.id, hash);
+        } catch (error) {
+            this.setState({ loading: false });
+            alert("There was an error with the transaction, please check your gas settings.");
+            return;
+        }
+        this.fetchData();
+    }
+    fetchData = async () => {
+        console.log('this.state.account: ', this.state.account);
+        const contractDetails = await getContractHash(this.props.match.params.id);
+        console.log('contractDetails: ', contractDetails);
+
         const ipfsHash = contractDetails[0];
+        console.log('XXXX: ', ipfsHash);
+
         if (!ipfsHash) { return }
         const timestamp = contractDetails[1].c[0];
-        console.log('time: ', timestamp);
+        console.log('timestamp: ', );
+
         const details = await getJSON(ipfsHash);
-        console.log('d: ', details);
-        this.setState({ json: details, loading: false, timestamp })
+        this.setState({ ipfsData: details, loading: false, timestamp })
     }
     handleAbout = (e) => {
         this.setState({ about: e.target.value });
@@ -46,24 +59,7 @@ export class MyForm extends Component {
     handleWebsite = (e) => {
         this.setState({ website: e.target.value });
     }
-    handleSubmit = async (e) => {
-        e.preventDefault();
-        this.setState({ loading: true });
-        const timeStamp = Math.floor(Date.now());
-        const { about, github, website } = this.state;
-        const hash = await setJSON({ about, github, website });
-        console.log('IPFS Hash: ', hash);
-        let contractDetails;
-        try {
-            contractDetails = await setContractHash(this.state.account, hash);
-            console.log('contractDetails: ', contractDetails);
-        } catch (error) {
-            this.setState({ loading: false });
-            alert("There was an error with the transaction, please check your gas settings.");
-            return;
-        }
-        this.retrieveIPFS(contractDetails);
-    }
+
     render() {
         const { about, github, website } = this.state;
         return (
@@ -81,15 +77,12 @@ export class MyForm extends Component {
                 <Col sm={5}>
                     {this.state.timestamp ?
                         <div>
-                            <p>Data loaded from Blockchain / IPFS:</p>
+                            <p>Data loaded from Ethereum / IPFS: <br />Time saved to block: {new Date(Number(this.state.timestamp + "000")).toUTCString()}</p>
                             <div className="b-chain-data">
-                                <h3>About me: </h3>{this.state.json.about}
-                                <h3>Github URL: </h3>{this.state.json.github}
-                                <h3>Website: </h3>{this.state.json.website}
+                                <h3>About me: </h3>{this.state.ipfsData.about}
+                                <h3>Github URL: </h3>{this.state.ipfsData.github}
+                                <h3>Website: </h3>{this.state.ipfsData.website}
                             </div>
-                            <br /><br />
-                            <p>Transaction details: {this.state.account}</p>
-                            <p>Block saved at: {this.state.timestamp}</p>
                         </div>
                         :
                         <h4>No record found. Please enter and submit data on the left</h4>

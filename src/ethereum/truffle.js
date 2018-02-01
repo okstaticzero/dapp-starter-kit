@@ -11,6 +11,15 @@ module.exports = {
       port: 9545,
       network_id: '*', // match any network
     },
+    ropsten: {
+      provider: new HDWalletProvider(
+        mnemonic,
+        'https://ropsten.infura.io/XAmfM8SVSh5OkuiYMIBx',
+        2
+      ),
+      network_id: 3,
+      gas: 4600000,
+    },
     rinkeby: {
       provider: new HDWalletProvider(
         mnemonic,
@@ -19,7 +28,7 @@ module.exports = {
       ),
       network_id: 4,
       gas: 6712388,
-      gasPrice: 10000000
+      gasPrice: 1000000000
     },
   },
 };

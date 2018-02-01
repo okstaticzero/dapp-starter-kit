@@ -1,15 +1,17 @@
-pragma solidity ^0.4.17;
+pragma solidity ^0.4.18;
 
 contract MyDetails {
    
     mapping (address => string) ipfsHashes;
+    mapping (address => uint) timestamp;
     
     function setHash(string ipfsHash) public {
        ipfsHashes[msg.sender] = ipfsHash;
+       timestamp[msg.sender] = now;
     }
 
     function getHash(address account) public view returns(string, uint) {
-      return (ipfsHashes[account], block.timestamp);
+      return (ipfsHashes[account], timestamp[account]);
     }
 
 }
