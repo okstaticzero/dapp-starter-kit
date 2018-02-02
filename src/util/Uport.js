@@ -19,5 +19,21 @@ const initAccount = async () => {
     return { userAccount, user }
 }
 
+// Attest specific credentials
+export const attestCredentials = async (receiving_address) => {
+    uport.attestCredentials({
+        sub: receiving_address,
+        claims: {
+            VERIFIED_PROVIDER: "Hey its matt"
+        },
+        exp: new Date().getTime() + 30 * 24 * 60 * 60 * 1000, // 30 days from now
+    }).then(attestation => {
+        // send attestation to user
+        console.log('ATTESTED: ', attestation);
+
+        //uport.showRequest(attestation)
+    })
+}
+
 const web3 = uport.getWeb3()
 export { web3, uport, MNID, initAccount }
