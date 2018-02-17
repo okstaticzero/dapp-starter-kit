@@ -5,6 +5,12 @@ var mnemonic =
 module.exports = {
   // See <http://truffleframework.com/docs/advanced/configuration>
   // to customize your Truffle configuration!
+  solc: {
+    optimizer: {
+      enabled: true,
+      runs: 200
+    }
+  },
   networks: {
     development: {
       host: 'localhost',
@@ -24,11 +30,11 @@ module.exports = {
       provider: new HDWalletProvider(
         mnemonic,
         'https://rinkeby.infura.io/XAmfM8SVSh5OkuiYMIBx',
-        2
+        1
       ),
-      network_id: 4,
+      network_id: 5,
       gas: 6712388,
-      gasPrice: 100000000
+      gasPrice: 10000000
     },
   },
 };

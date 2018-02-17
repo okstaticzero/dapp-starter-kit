@@ -10,7 +10,7 @@ export class Login extends Component {
         const identity = await initAccount();
         console.log('Identity: ', identity);
         //identity passed back from uPort
-        this.props.setIdentity(identity.userAccount, identity.user.name, identity.user.avatar.uri)
+        this.props.setIdentity(identity.userAccount, identity.user.name, identity.user.avatar.uri, identity.user.address)
     }
     render() {
         return (

@@ -7,10 +7,12 @@ import { Route, Redirect, withRouter } from 'react-router-dom'
 class App extends Component {
   constructor(props) {
     super(props)
-    this.state = { name: "", avatar: "" }
+    this.state = { name: "", avatar: "", address: "" }
   }
-  setIdentity = (account, name, avatar) => {
-    this.setState({ name, avatar })
+  setIdentity = (account, name, avatar, address) => {
+    console.log('address: ', address);
+
+    this.setState({ name, avatar, address })
     //
     this.props.history.push(`/details/${account}`)
   }
@@ -30,7 +32,9 @@ class App extends Component {
         <Route exact path="/" render={() => (
           <Login setIdentity={this.setIdentity} />
         )} />
-        <Route path="/details/:id" component={MyForm} />
+        <Route path="/details/:id" render={() => (
+          <MyForm uportAddress={this.state.address} />
+        )} />
       </div>
     );
   }

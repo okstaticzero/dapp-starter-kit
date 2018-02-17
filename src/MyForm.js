@@ -7,6 +7,7 @@ import Loader from "./Loader"
 import { setContractHash, getContractHash } from './services/DetailsService';
 import { Button } from 'react-bootstrap';
 import { attestCredentials } from "./util/Uport";
+import { Route, Redirect, withRouter } from 'react-router-dom'
 
 export class MyForm extends Component {
     constructor() {
@@ -38,7 +39,7 @@ export class MyForm extends Component {
         this.fetchData();
     }
     fetchData = async () => {
-        console.log('this.state.account: ', this.state.account);
+        //console.log('this.state.account: ', this.state.account);
         const contractDetails = await getContractHash(this.props.match.params.id);
         console.log('contractDetails: ', contractDetails);
 
@@ -63,7 +64,7 @@ export class MyForm extends Component {
     }
     doAttest = () => {
         alert("attest")
-        attestCredentials('0x2ea515279f0be339a8a1da338ccee8ec56b678e1');
+        attestCredentials(this.props.uportAddress);
     }
 
     render() {
@@ -110,4 +111,4 @@ MyForm.propTypes = {
 
 }
 
-export default MyForm
+export default withRouter(MyForm)
