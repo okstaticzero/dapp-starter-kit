@@ -3,16 +3,23 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+.App-title {
+  font-size: 1.6em;
+}
+
 .text-large{
   font-size: 16px;
 }
 .App {
   text-align: left;
 }
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 30px;
+.content{
+  display: flex;
+  justify-content: center;
+  align-items: center
+}
+.grid-row{
+  padding-top: 30px;
 }
 
 .App-header {
@@ -20,11 +27,7 @@ body {
   height: 120px;
   padding: 20px;
   color: white;
-  text-align: center;
-}
-
-.my-form{
-  margin-top: 40px;
+  text-align: left;
 }
 
 .login{
@@ -32,52 +35,38 @@ body {
   text-align: center;
 }
 
-.App-title {
-  font-size: 1.9em;
-}
 
 .avatar{
+  display: flex;
   position: absolute;
-  right:10px;
-  top:20px;
-  width:180px;
+  right:20px;
+  top:15px;
+  text-align: right;
+  
 }
 .avatar img{
-  width:45%;
+  width:70px;
+  align-self: center
 }
 .avatar p{
-  margin-top: 6px;
+  margin-right: 15px;
   color:#CCC;
   text-transform: capitalize;
-
 }
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-.list{
-  background-color: rgb(247, 247, 247);
-  padding:20px;
-}
-.nav-link{
+.logout{
   display: block;
-}
-
-span, h1{
-  color:#999;
-}
-
-.b-chain-data{
-  border:1px solid #CCC;
-  background-color: rgb(240, 240, 240);
+  margin-right: 15px;
+  padding-top: 15px;
+  color:yellow
+ }
+ .logout:hover{
+   color:white
+ }
+.blockchain-display{
+  background-color: rgb(245, 244, 244);
   padding: 0px 20px 10px 20px;
   border-radius:4px;
+  min-height: 150px;
 }
 h3{
   color:#888;
@@ -86,6 +75,7 @@ h3{
 .outerLoader{
   display: flex;
   top:0;
+  left:0;
   align-items: center;
   justify-content: center;
   flex-direction: column;
