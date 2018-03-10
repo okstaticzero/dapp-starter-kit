@@ -18,3 +18,5 @@ Run the app:
 
 Build for production:
 ```yarn build```
+
+*All code and opinions are my own and not the views of my employer.*
