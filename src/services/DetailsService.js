@@ -18,11 +18,7 @@ export const setContractHash = async (account, hash) => {
 
 export const getContractHash = async (account) => {
   const instance = await getInstance();
-  console.log('11111: ', account);
-
   const items = await instance.getHash(account);
-  console.log('222222: ', items);
-
   return items;
 }
 

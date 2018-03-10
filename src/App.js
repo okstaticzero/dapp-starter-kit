@@ -34,7 +34,7 @@ class App extends Component {
               <div className="avatar">
                 <div>
                   <p>{this.state.userName}</p>
-                  <a href="#" onClick={this.handleLogout} className="logout">Logout</a>
+                  <a href="" onClick={this.handleLogout} className="logout">Logout</a>
                 </div>
                 <img src={this.state.avatar} alt="avatar" />
               </div>
@@ -48,8 +48,8 @@ class App extends Component {
               <Dashboard specificNetworkAddress={this.state.specificNetworkAddress} />
             ) : (
                 <Col sm={6} smOffset={3} className="login">
-                  <p className="text-large">This App uses uPort for identity verification and authentication on the Blockchain.
-                      Download the uPort app on your mobile phone to create your identity.
+                  <p className="text-large">This app uses uPort for login and transaction approvals.
+                      Download the uPort app on your mobile phone to begin.
               <a href="https://www.uport.me/" rel="noopener noreferrer" target="_blank"> https://www.uport.me/</a>
                   </p>
                   <Button onClick={this.handleLogin}>Login with uPort</Button>

@@ -1,6 +1,5 @@
 const IPFS = require('ipfs-mini');
 const ipfs = new IPFS({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' });
-//const ipfs = new IPFS({ host: 'localhost', port: 5001, protocol: 'http' });
 
 export const setJSON = (obj) => {
     return new Promise((resolve, reject) => {
@@ -13,7 +12,6 @@ export const setJSON = (obj) => {
         });
     });
 }
-
 
 export const getJSON = (hash) => {
     return new Promise((resolve, reject) => {
